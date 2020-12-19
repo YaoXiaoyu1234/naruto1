@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>login</title>
+	<style>
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		body{
+			margin:0;
+            background-image: url(imgs/卡卡西2.jpg);
+            background-repeat:no-repeat;
+            background-size: cover;
+		}
+		.box{
+			width: 300px;
+			height: 400px;
+			padding: 0 20px;
+			border: 2px solid #1688ea;
+			margin: 50px auto;
+		}
+		.tit{
+			margin-top: 5px;
+			margin-bottom: 30px;
+		}
+		.brand{
+			color: #1688ea;
+			font-size: 18px;
+			margin-right: 20px;
+		}
+		.inp{
+			width: 100%;
+			height: 40px;
+			text-indent: 8px;
+		}
+		.notice{
+			height: 30px;
+			line-height: 30px;
+			font-size: 12px;
+		}
+
+		.code{
+			width: 60%;
+		}
+		.getCode{
+			width: 35%;
+			height: 44px;
+			float: right;
+			border: none;
+			background-color: #eee;
+		}
+		.codeImg{
+			height: 40px;
+		}
+		.btn{
+			background: #1688ea;
+			width: 100%;
+			height: 40px;
+			border: none;
+			margin-top: 8px;
+			color: #fff;
+			border-radius: 3px;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="box">
+		<p class="tit">
+			<span class="brand">火影忍者</span>
+			<span>用户登录</span>
+		</p>
+
+		<input class="inp" type="text" placeholder="用户名" onfocus="ofocus()"
+		onblur="oblur()">
+		<p class="notice"></p>
+
+		<input class="inp" type="password" placeholder="密码" onfocus="pofocus()"
+		onblur="poblur()">
+		<p class="notice"></p>
+
+		<div>
+			<input class="inp code" type="text" placeholder="验证码" onblur="bl()">
+			<button class="getCode" onclick="gCode()">获取验证码</button>
+		</div>
+		<div class="codeImg">
+			<!-- 点击‘获取验证码’按钮后，在此处添加 验证码图片的img标签 -->
+		</div>
+		<p class="notice"></p>
+
+		<input type="checkbox" checked>下次自动登录
+		<button class="btn" onclick="logoin()">登录</button>
+	</div>
+	<script>
+		var name = 0;
+		var password = 0;
+		var code = 0;
+		function ofocus(){
+			 var ofocus=document.getElementsByClassName("notice")[0];
+			 ofocus.innerHTML="请输入4-10位用户名";
+		}
+		function pofocus(){
+			 var pfocus=document.getElementsByClassName("notice")[1];
+			 pfocus.innerHTML="请输入6-12位密码";
+		}
+		function oblur(){
+			var oblur = document.getElementsByClassName("notice")[0];
+			var inp = document.getElementsByClassName("inp")[0];
+			if (inp.value.length>10||inp.value.length<4) {
+				oblur.innerHTML = "用户名位数不对";
+				name=0;
+			}else{
+				oblur.innerHTML="";
+				name=1;
+
+			}
+		}
+		function poblur(){
+			var poblur = document.getElementsByClassName("notice")[1];
+			var inp = document.getElementsByClassName("inp")[1];
+			if(inp.value.length<6||inp.value.length>12){
+				poblur.innerHTML = "密码位数不对";
+				password = 0;
+			}else{
+				poblur.innerHTML="";	
+				password = 1;
+			}
+		}
+		var img1=new Image();
+		var i;
+		var arr=["zAZfB","ZEhUN","zFC9H","zFC9H","Zin4c","ZITGj","zJ6iV","zjsKP","ZKc9S","zKDXU"];
+		function gCode(){
+			var img = document.getElementsByClassName("codeImg")[0];
+			
+			i = parseInt(Math.random()*9);
+			img1.src="image/"+arr[i]+".jpg";
+			img.appendChild(img1);
+		
+		}
+		function bl(){
+			var inp = document.getElementsByClassName("inp code")[0];
+			var not=document.getElementsByClassName("notice")[2];
+			if(inp.value==arr[i]){
+				not.innerHTML=" ";
+				code= 1;
+			}else{
+				not.innerHTML = "验证码错误";
+				code = 0;
+			}	
+		}
+		function logoin(){
+			if(name==1&&password==1&&code==1){
+				alert("登陆成功");
+			}
+		}
+	</script>
+</body>
+</html>
